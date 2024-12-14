@@ -1,38 +1,110 @@
-.App {
-  text-align: center;
+html,
+body,
+#root {
+    width: 100%;
+    height: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+body {
+    background-color: antiquewhite;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* 
+body::-webkit-scrollbar {
+    display: none;
+} */
+
+
+
+.container {
+    width: 100%;
+    height: 100%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+
+.topLeft {
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 0 0 100% 0;
+    background-color: rgb(141, 58, 58);
 }
 
-.App-link {
-  color: #61dafb;
+.canvas {
+    position: fixed;
+    width: 100%;
+    height: 100%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.circle {
+    position: fixed;
+    z-index: -1;
+    width: 142vmax;
+    height: 142vmax;
+    border-radius: 100%;
+    background-color: rgb(255, 176, 140);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+}
+
+.spacer {
+    height: 100%
+}
+
+.firstHalf {
+    width: 50%;
+    height: 100%;
+    /* background-color: rgb(0, 0, 0); */
+    position: relative;
+}
+
+
+.secondHalf {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: end;
+}
+
+.secondHalfDiv {
+    width: 50%;
+    height: 100%;
+    background-color: black;
+    position: relative;
+    display: flex;
+    justify-content: end;
+}
+
+.secondScroll {
+    height: 100%;
+    width: 2vw;
+    opacity: 0;
+    background-color: rgb(255, 176, 140);
+}
+
+.firstHalfDiv {
+    width: 100%;
+    height: 100%;
+    /* border-top-right-radius: 1000px; */
+    background-color: black;
+}
+
+.firstScroll {
+    height: 100%;
+    opacity: 0;
+    width: 15px;
+    background-color: rgb(255, 176, 140);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.roomToLeft {
+    position: absolute;
+    top: -100%;
 }
