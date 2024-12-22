@@ -1,13 +1,9 @@
-import React, { forwardRef, Suspense, useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
-import { Material, MeshStandardMaterial, TextureLoader } from 'three'
+import {  MeshStandardMaterial, TextureLoader } from 'three'
 import { a, useSpring, useSpringRef } from '@react-spring/three'
-import { useFrame, useLoader } from '@react-three/fiber'
+import {  useLoader } from '@react-three/fiber'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
-import ScrollTrigger from 'gsap/ScrollTrigger'
-import { GUI } from 'dat.gui'
-import { useEffect } from 'react'
 import Mummy from './Mummy'
 import { Text } from '@react-three/drei'
 const Room = forwardRef((props, ref) => {
@@ -434,13 +430,8 @@ const Room = forwardRef((props, ref) => {
     }, [roomRef])
 
 
-    const wallTexture = useLoader(TextureLoader, 'Wall_texture.jpg')
     const woodTexture1 = useLoader(TextureLoader, 'woodTexture.jpg')
-    const woodTexture2 = useLoader(TextureLoader, 'woodTexture2.jpg')
-    const marbleTexture = useLoader(TextureLoader, 'Marble_texture.jpg')
     const curtainTexture = useLoader(TextureLoader, 'curtain_texture.jpg')
-    const cushionTexture = useLoader(TextureLoader, 'cushion_texture.jpg')
-    const bedsheetTexture = useLoader(TextureLoader, 'bedsheet_texture.png')
     const bedsheetTextureNormal = useLoader(TextureLoader, 'Bedsheet_texture_normal.png')
 
     const planeRef = useRef()
@@ -451,8 +442,6 @@ const Room = forwardRef((props, ref) => {
             position-x={goLeft.x}
             position-z={goLeft.z}
             position-y={goLeft.y}
-            // position-y={-5}
-            // position-z={1}
             castShadow
         >
 
@@ -466,53 +455,36 @@ const Room = forwardRef((props, ref) => {
                 castShadow
                 receiveShadow
                 geometry={nodes.Walls.geometry}
-                // material={materials.walls}
                 material={new MeshStandardMaterial({
-                    // map: wallTexture,
                     color: "#ffe8ca"
                 })}
-                // material={materials.Material}
 
                 position={[-0.631, 2.109, -0.86]}
             />
-            {/* <pointLight position={[0.8, 0.75, 0]} decay={4} intensity={100} /> */}
             <mesh
                 castShadow
                 receiveShadow
                 geometry={nodes.Floor.geometry}
                 material={new MeshStandardMaterial({
-                    // map: marbleTexture,
                     color: "#ffe8ca"
                 })}
-                // material={materials.Material}
 
                 position={[0, 0.15, 0]}
             />
 
-            //outer walls
-            {/* <mesh 
-                castShadow
-                receiveShadow
-                geometry={nodes.Walls001.geometry}
-                material={materials.Material}
-                position={[0.442, 3.136, -0.258]}
-                scale={1.938}
-            /> */}
-
+            
             //cupboard
             <a.group position={[-0.787, 1.222, -1.265]} scale={cupboard.scale}>
                 <mesh
                     castShadow
                     receiveShadow
                     geometry={nodes.Cube001.geometry}
-                    // material={materials.cupboard}
                     material={new MeshStandardMaterial({ map: woodTexture1, color: "#ffd59e" })}
                 />
                 <mesh
                     castShadow
                     receiveShadow
                     geometry={nodes.Cube001_1.geometry}
-                    // material={materials.Mirror}
                     material={new MeshStandardMaterial({ color: "#ffd59e" })}
                 />
             </a.group>
@@ -531,9 +503,7 @@ const Room = forwardRef((props, ref) => {
                     castShadow
                     receiveShadow
                     geometry={nodes.Cube006.geometry}
-                    // material={materials.shelf}
                     material={new MeshStandardMaterial({
-                        //  map: woodTexture2,
                         color: "#ffd59e"
                     })}
                 />

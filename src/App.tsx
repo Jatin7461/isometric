@@ -1,24 +1,16 @@
 'use client'
-import React, { LegacyRef, RefObject, Suspense, useEffect, useRef, useState } from 'react';
-import logo from './logo.svg';
+import React, { LegacyRef, RefObject, useRef, useState } from 'react';
 import './App.css';
-import Room from './components/Room'
-import { Canvas, useThree } from '@react-three/fiber'
-import { OrbitControls } from '@react-three/drei';
-import { AmbientLight, DirectionalLight } from 'three';
+import { Canvas} from '@react-three/fiber'
 import Scene from './components/Scene';
 import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
-import { GUI } from 'dat.gui';
-import Floor from './components/Floor';
 import ContentHeading from './components/ContentHeading';
 import { FirstHalfContentHeading, FirstHalfContentString, FirstHalfHeadingName, secondHalfContentHeading, secondHalfContentText, secondHalfHeadingName, thirdHalfContentHeading, thirdHalfContentText, thirdHalfHeadingName } from './components/Data';
 import ReactLenis from '@studio-freight/react-lenis';
-import { time } from 'console';
 import Name from './components/Name';
 import SplitType from 'split-type';
-import lenis from 'lenis';
 function App() {
   window.onbeforeunload = function () {
     window.scrollTo(0, 0);
