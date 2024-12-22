@@ -10,5 +10,5 @@ export const secondHalfContentText = "I'm a UI Developer currently working in Co
 
 
 export const thirdHalfHeadingName = "LETS CONNECT"
-export const thirdHalfContentHeading = "Linkedin and Instagram"
-export const thirdHalfContentText = "I'm available on Linkedin and Instagram, so lets connect :)"
+export const thirdHalfContentHeading = "My Socials"
+export const thirdHalfContentText = "I'm available on Linkedin, Twitter (X) and Instagram, so lets connect :)"

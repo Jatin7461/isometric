@@ -5,10 +5,11 @@ type Props = {
     headingName: string,
     containerClass: string,
     number: string,
-    color: string
+    color: string,
+    showButtons: string
 }
 
-const ContentHeading = ({ contentText, contentHeading, headingName, containerClass, number, color }: Props) => {
+const ContentHeading = ({ contentText, contentHeading, headingName, containerClass, number, color, showButtons }: Props) => {
     return <div className={`bglogo ${containerClass}`}>
 
         <h1 className="heading">
@@ -25,6 +26,28 @@ const ContentHeading = ({ contentText, contentHeading, headingName, containerCla
             <p className="contentText">{contentText}</p>
 
             <p></p>
+        </div>
+        <div className={`display-none ${showButtons}`}>
+
+            <div className="socialLinks">
+                <a href="https://www.linkedin.com/in/jatin-gandhi-3a5141241/" target="_blank">
+                    <div className="btn linkedin">
+                        Linkedin
+                    </div>
+                </a>
+                <a href="https://www.instagram.com/jatin.005" target="_blank">
+                    <div className="btn insta">
+                        Instagram
+                    </div>
+                </a>
+                <a href="https://www.x.com" target="_blank">
+                    <div className="btn x">
+
+                        Twitter
+                    </div>
+                </a>
+
+            </div>
         </div>
     </div>
 }

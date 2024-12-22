@@ -48,7 +48,7 @@ function App() {
     });
     first.from('.firstHalfDiv', {
       yPercent: 100,
-      borderTopRightRadius: 1000,
+      borderTopRightRadius: 500,
       ease: 'linear'
     })
       // .call(() => { ScrollTrigger.getById('firsthalf')?.disable(false) })
@@ -64,7 +64,7 @@ function App() {
       }, { yPercent: -100 }, '<')
       .to('.firstHalfDiv', {
         yPercent: -100,
-        borderBottomRightRadius: 1000,
+        borderBottomRightRadius: 500,
         ease: 'linear',
         onComplete: () => {
           ScrollTrigger.getById('room')?.enable()
@@ -131,7 +131,7 @@ function App() {
     })
       .from('.secondHalfDiv', {
         yPercent: 100,
-        borderTopLeftRadius: 1000,
+        borderTopLeftRadius: 500,
         // delay: 15
         ease: 'linear'
       })
@@ -149,7 +149,7 @@ function App() {
       }, '<')
       .to('.secondHalfDiv', {
         yPercent: -100,
-        borderBottomLeftRadius: 1000,
+        borderBottomLeftRadius: 500,
         ease: 'linear'
       })
 
@@ -167,7 +167,7 @@ function App() {
     })
       .from('.thirdHalfDiv', {
         yPercent: 100,
-        borderTopRightRadius: 1000,
+        borderTopRightRadius: 500,
         ease: 'linear'
       })
       .to('.thirdScroll', {
@@ -186,7 +186,7 @@ function App() {
       }, '<')
       .to('.thirdHalfDiv', {
         yPercent: -100,
-        borderBottomRightRadius: 1000,
+        borderBottomRightRadius: 500,
         ease: 'linear'
 
       })
@@ -232,13 +232,13 @@ function App() {
         <div className="spacer"></div>
         <div className="firstHalf">
           <div className="firstHalfDiv">
-            <ContentHeading color='#ff6767' number='01' containerClass='firstContent' headingName={FirstHalfHeadingName} contentHeading={FirstHalfContentHeading} contentText={FirstHalfContentString} />
+            <ContentHeading showButtons="" color='#ff6767' number='01' containerClass='firstContent' headingName={FirstHalfHeadingName} contentHeading={FirstHalfContentHeading} contentText={FirstHalfContentString} />
           </div>
           <div className="firstScroll"></div>
         </div>
         <div className="secondHalf">
           <div className="secondHalfDiv">
-            <ContentHeading color='#5ec06d' number='02' containerClass='secondContent' headingName={secondHalfHeadingName} contentHeading={secondHalfContentHeading} contentText={secondHalfContentText} />
+            <ContentHeading showButtons="" color='#5ec06d' number='02' containerClass='secondContent' headingName={secondHalfHeadingName} contentHeading={secondHalfContentHeading} contentText={secondHalfContentText} />
 
             <div className="spacer roomToLeft"></div>
             <div className="secondScroll"></div>
@@ -251,7 +251,7 @@ function App() {
         <div className="spacer"></div>
         <div className="thirdHalf">
           <div className="thirdHalfDiv">
-            <ContentHeading color='#8585ff' number='03' containerClass='thirdContent' headingName={thirdHalfHeadingName} contentHeading={thirdHalfContentHeading} contentText={thirdHalfContentText} />
+            <ContentHeading showButtons="display-block" color='#8585ff' number='03' containerClass='thirdContent' headingName={thirdHalfHeadingName} contentHeading={thirdHalfContentHeading} contentText={thirdHalfContentText} />
           </div>
           <div className='thirdScroll'></div>
         </div>

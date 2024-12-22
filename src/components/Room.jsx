@@ -278,6 +278,23 @@ const Room = forwardRef((props, ref) => {
     const referRef = useRef()
     const thankyouRef = useRef()
     const mummyRef = useRef()
+
+    let canvasX = 17
+    let roomToLeftX = -2.541
+    let roomToLeftY = 18.953
+    let roomToLeftZ = 27.657
+    let roomToRightY = 13.457
+    let roomToRightZ = 20.064
+
+    if (screenWidth <= 1024) {
+        canvasX = 9.643;
+        roomToLeftX = -1.8
+        roomToLeftY = 20.455
+        roomToLeftZ = 23.699
+        roomToRightY = 16.131
+        roomToRightZ = 18.293
+    }
+
     useGSAP(() => {
         gsap.timeline({
             defaults: { duration: 1 },
@@ -294,9 +311,7 @@ const Room = forwardRef((props, ref) => {
                 scale: 1,
             },)
             .to(roomRef.current.position, {
-                x: 17,
-                // z: 5,
-                //  y: -1,
+                x: canvasX,
                 onComplete: () => {
                     console.log(roomRef.current.position)
                 }
@@ -323,12 +338,10 @@ const Room = forwardRef((props, ref) => {
                 // pin: true
             }
         }).to(roomRef.current.position, {
-            // x: -9,
-            // z: 20,
-            // y: 8,
-            x: -2.541,
-            y: 18.953,
-            z: 27.657,
+            x: roomToLeftX,
+            y: roomToLeftY,
+            z: roomToLeftZ,
+
             ease: 'power1.inOut'
         })
             .to(roomRef.current.rotation, {
@@ -356,7 +369,8 @@ const Room = forwardRef((props, ref) => {
         })
             .to(roomRef.current.position, {
                 x: 0,
-                y: 13.457, z: 20.064,
+                y: roomToRightY, z: roomToRightZ,
+                // y: 16.131, z: 18.293,
                 ease: 'linear'
             })
             .to(roomRef.current.rotation, {
@@ -382,6 +396,9 @@ const Room = forwardRef((props, ref) => {
                     x: -4.759,
                     y: 19.019,
                     z: 25.739,
+                    // x: -2.25,
+                    // y: 21.537,
+                    // z: 23.699,
                     ease: 'linear'
                 })
                 .to(roomRef.current.rotation, {

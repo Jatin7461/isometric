@@ -263,3 +263,37 @@ body {
     transform: translateX(-50%);
     bottom: 2%;
 }
+
+.socialLinks {
+    display: flex;
+    /* flex-direction: column; */
+    width: 80%;
+    gap: 24px;
+}
+
+.btn {
+    width: 150px;
+    height: 40px;
+    background-color: #8585ff;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    /* text-transform: uppercase; */
+    color: white;
+    text-decoration: none;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.display-none {
+    display: none;
+}
+
+.display-block{
+    display: block;
+}
