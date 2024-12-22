@@ -11,3 +11,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.playwrite-mx-guides-regular {
+  font-family: "Playwrite MX Guides", serif;
+  font-weight: 400;
+  font-style: normal;
+}

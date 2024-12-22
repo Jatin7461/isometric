@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef } from 'react'
+import React, { forwardRef, Suspense, useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { Material, MeshStandardMaterial, TextureLoader } from 'three'
 import { a, useSpring, useSpringRef } from '@react-spring/three'
@@ -8,16 +8,14 @@ import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import { GUI } from 'dat.gui'
 import { useEffect } from 'react'
+import Mummy from './Mummy'
+import { Text } from '@react-three/drei'
 const Room = forwardRef((props, ref) => {
     const { nodes, materials } = useGLTF('uploads_files_3291978_room+glb.glb')
 
-    // console.log(loader)
+    const screenWidth = window.innerWidth
 
-    // useGSAP(() => {
-    //     // console.log(roomRef, 'in gsap')
-    // }, [roomRef])
-
-    const delay = 5000
+    const delay = 2300
 
     const zoomInRef = useSpringRef()
     const zoomIn = useSpring({
@@ -27,11 +25,7 @@ const Room = forwardRef((props, ref) => {
 
 
 
-    // const zoomIn = useSpring({
-    //     from: { scale: 0 },
-    //     to: { scale: 1 },
-    //     delay: 300
-    // })
+
 
 
     const cupboard = useSpring({
@@ -234,50 +228,39 @@ const Room = forwardRef((props, ref) => {
     const box = useSpring({
         from: { scale: 1 },
         scale: 0,
-        // config: { duration: 500 },
-        delay: 4000,
+
+        delay: 2000,
     })
-    // const goLeft = useSpring({
-    //     from: { x: 0, y: 0, z: 0, rotation: 0 },
-    //     to: [
-    //         { x: -20, y: 0, z: 0, rotation: Math.PI * 1 },
-    //         { x: 20, y: 0, z: 0, rotation: Math.PI * 1 },
-    //     ],
-    //     delay: 1300,
-    //     // config: { duration: [] }
-    // })
+
     const api = useSpringRef()
     const goLeft = useSpring({
-        from: { x: 0, y: 0, z: 0, rx: 0, ry: Math.PI * 0.3 },
+        from: { x: 0, y: 0, z: 0, rx: -0.742, ry: Math.PI * 2.3, rz: 0 },
         ref: api
     })
 
     setTimeout(() => {
+
         api.start({
-            to: { x: -20, y: 0, z: 0, rx: 0, ry: Math.PI * 0.3 },
-            delay: 1300
+            to: { x: 0, y: -0.245, z: 7.033, rx: -0.742, ry: Math.PI * -0.25, rz: 0 },
+            delay: 1300,
         })
-        api.start({
-            to: { x: 20, y: 0, z: 0, rx: 0, ry: Math.PI * 0.3 },
-            delay: 2300
-        })
-        api.start({
-            to: { x: 0, y: -5, z: 1, rx: Math.PI * -0.1, ry: Math.PI * -2.25 },
-            delay: 3300
-        })
-        api.start({
-            to: { x: 0, y: -1, z: 5, rx: Math.PI * -0.1, ry: Math.PI * -2.25 },
-            delay: 4700
-        })
+
+
+
 
         zoomInRef.start({
             to: { scale: 1 },
-            // config: { duration: 10000 },
+
             delay: 300
         })
+
+        let finalScale = 5
+        if (screenWidth <= 1024) {
+            finalScale = 3
+        }
         zoomInRef.start({
-            to: { scale: 4 },
-            delay: 3300,
+            to: { scale: finalScale },
+            delay: 1300,
         })
     }, 100)
 
@@ -290,6 +273,11 @@ const Room = forwardRef((props, ref) => {
     })
 
     const roomRef = ref
+    const netflixLogoRef = useRef()
+    const netflixRef = useRef()
+    const referRef = useRef()
+    const thankyouRef = useRef()
+    const mummyRef = useRef()
     useGSAP(() => {
         gsap.timeline({
             defaults: { duration: 1 },
@@ -302,27 +290,31 @@ const Room = forwardRef((props, ref) => {
             },
         })
 
-            .to('.circle', {
+            .to('.circleRed', {
                 scale: 1,
             },)
             .to(roomRef.current.position, {
-                x: 10,
+                x: 17,
+                // z: 5,
+                //  y: -1,
+                onComplete: () => {
+                    console.log(roomRef.current.position)
+                }
             }, '<')
             .to(roomRef.current.rotation, {
-                y: -Math.PI * 2.5
+                y: -Math.PI * 0.4
             }, '<')
             .to(roomRef.current.scale, {
-                x: 3,
-                y: 3,
-                z: 3,
+                // x: 4,
+                // y: 4,
+                // z: 4,
             }, '<')
 
         gsap.timeline({
             scrollTrigger: {
                 trigger: '.roomToLeft',
-                markers: true,
                 start: '-450% top',
-                end: '100% bottom',
+                end: '300% bottom',
                 scrub: true,
                 id: 'room-to-left',
                 onEnter: () => {
@@ -331,34 +323,101 @@ const Room = forwardRef((props, ref) => {
                 // pin: true
             }
         }).to(roomRef.current.position, {
-            x: -9,
-            z: 20,
-            y: 8,
+            // x: -9,
+            // z: 20,
+            // y: 8,
+            x: -2.541,
+            y: 18.953,
+            z: 27.657,
             ease: 'power1.inOut'
         })
             .to(roomRef.current.rotation, {
-                y: -Math.PI * 2,
-                x: -0.4,
+                // y: -Math.PI * 2,
+                // x: -0.4,
+                x: -0.686,
+                y: 0.771,
                 ease: 'power1.inOut'
             }, '<')
+            .to('.circleGreen', {
+                scale: 1
+            }, '<')
+
+
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: '.roomToRight',
+                scrub: true,
+                start: '-300% top',
+                end: '500% top',
+                id: "toRight",
+                markers: true
+
+            }
+        })
+            .to(roomRef.current.position, {
+                x: 0,
+                y: 13.457, z: 20.064,
+                ease: 'linear'
+            })
+            .to(roomRef.current.rotation, {
+                y: -0.748,
+                x: -0.748,
+                ease: 'linear'
+            }, '<')
+            .to('.circleBlue', {
+                scale: 1
+            }, '<')
+
+        setTimeout(() => {
+
+            gsap.timeline({
+                scrollTrigger: {
+                    trigger: '.thankyou',
+                    scrub: true,
+                    start: '-500% top',
+                    end: '500% top'
+                }
+            })
+                .to(roomRef.current.position, {
+                    x: -4.759,
+                    y: 19.019,
+                    z: 25.739,
+                    ease: 'linear'
+                })
+                .to(roomRef.current.rotation, {
+                    y: -0.33,
+                    ease: 'linear'
+
+                }, '<')
+                .to(netflixLogoRef.current.scale, {
+                    x: 0,
+                    y: 0, z: 0
+                })
+                .to(netflixRef.current.scale, {
+                    x: 0,
+                    y: 0,
+                    z: 0
+                }, '<')
+                .to(thankyouRef.current.scale, {
+                    x: 0.1,
+                    y: 0.1,
+                    z: 0.1
+                }, '<')
+                .to(referRef.current.scale, {
+                    x: 0.05,
+                    y: 0.05,
+                    z: 0.05,
+                }, '<')
+                .to(mummyRef.current.scale, {
+                    x: 1.251,
+                    y: 1.251,
+                    z: 7.802,
+                }, '<')
+            console.log(mummyRef, 'mummy')
+        }, 5000);
     }, [roomRef])
-    // useFrame(() => {
-    //     roomRef.current.rotation.y = Math.PI * (-2.25 + cursor.x)
-    //     roomRef.current.rotation.x = Math.PI * (-0.1 + cursor.y)
-    // })
 
 
-    /**
-     * final position -> rx = -0.1 * pi
-     *                     ry= pi * -0.25
-     * scale = 4
-     * x = goleft.x
-     * y=-1
-     * z = 5
-     * 
-     */
-
-    // console.log(zoomIn.scale, 'asdjfjskd')
     const wallTexture = useLoader(TextureLoader, 'Wall_texture.jpg')
     const woodTexture1 = useLoader(TextureLoader, 'woodTexture.jpg')
     const woodTexture2 = useLoader(TextureLoader, 'woodTexture2.jpg')
@@ -368,19 +427,33 @@ const Room = forwardRef((props, ref) => {
     const bedsheetTexture = useLoader(TextureLoader, 'bedsheet_texture.png')
     const bedsheetTextureNormal = useLoader(TextureLoader, 'Bedsheet_texture_normal.png')
 
-
+    const planeRef = useRef()
+    const planeRef2 = useRef()
+    useEffect(() => {
+        const gui = new GUI()
+        gui.add(roomRef.current.position, 'x', -50, 50, 0.001)
+        gui.add(roomRef.current.position, 'y', -50, 50, 0.001)
+        gui.add(roomRef.current.position, 'z', -50, 50, 0.001)
+        gui.add(roomRef.current.rotation, 'x', -Math.PI * 4, Math.PI * 4, 0.001)
+        gui.add(roomRef.current.rotation, 'y', -Math.PI * 4, Math.PI * 4, 0.001)
+        gui.add(roomRef.current.rotation, 'z', -Math.PI * 4, Math.PI * 4, 0.001)
+        return () => {
+            gui.destroy()
+        }
+    }, [])
 
     return (
-        <a.group ref={roomRef} {...props} dispose={null} rotation-y={goLeft.ry} rotation-x={goLeft.rx} scale={zoomIn.scale}
+        <a.group ref={roomRef} {...props} dispose={null} rotation-z={goLeft.rz} rotation-y={goLeft.ry} rotation-x={goLeft.rx} scale={zoomIn.scale}
             position-x={goLeft.x}
             position-z={goLeft.z}
             position-y={goLeft.y}
-        // position-y={-5}
-        // position-z={1}
+            // position-y={-5}
+            // position-z={1}
+            castShadow
         >
 
             <a.mesh position={[0.01, 2.18, 0]}
-                scale={box.scale}
+                scale={box.scale} castShadow receiveShadow
             >
                 <boxGeometry args={[4, 3.75, 4]} />
                 <meshStandardMaterial />
@@ -390,16 +463,28 @@ const Room = forwardRef((props, ref) => {
                 receiveShadow
                 geometry={nodes.Walls.geometry}
                 // material={materials.walls}
-                material={new MeshStandardMaterial({ map: wallTexture, color: "#8E8E8E" })}
+                material={new MeshStandardMaterial({
+                    // map: wallTexture,
+                    color: "#ffe8ca"
+                })}
+                // material={materials.Material}
+
                 position={[-0.631, 2.109, -0.86]}
             />
+            {/* <pointLight position={[0.8, 0.75, 0]} decay={4} intensity={100} /> */}
             <mesh
                 castShadow
                 receiveShadow
                 geometry={nodes.Floor.geometry}
-                material={new MeshStandardMaterial({ map: marbleTexture, color: "#8E8E8E" })}
+                material={new MeshStandardMaterial({
+                    // map: marbleTexture,
+                    color: "#ffe8ca"
+                })}
+                // material={materials.Material}
+
                 position={[0, 0.15, 0]}
             />
+
             //outer walls
             {/* <mesh 
                 castShadow
@@ -417,13 +502,14 @@ const Room = forwardRef((props, ref) => {
                     receiveShadow
                     geometry={nodes.Cube001.geometry}
                     // material={materials.cupboard}
-                    material={new MeshStandardMaterial({ map: woodTexture1 })}
+                    material={new MeshStandardMaterial({ map: woodTexture1, color: "#ffd59e" })}
                 />
                 <mesh
                     castShadow
                     receiveShadow
                     geometry={nodes.Cube001_1.geometry}
-                    material={materials.Mirror}
+                    // material={materials.Mirror}
+                    material={new MeshStandardMaterial({ color: "#ffd59e" })}
                 />
             </a.group>
             //cupboard handles
@@ -442,7 +528,10 @@ const Room = forwardRef((props, ref) => {
                     receiveShadow
                     geometry={nodes.Cube006.geometry}
                     // material={materials.shelf}
-                    material={new MeshStandardMaterial({ map: woodTexture2, color: "#A29181" })}
+                    material={new MeshStandardMaterial({
+                        //  map: woodTexture2,
+                        color: "#ffd59e"
+                    })}
                 />
                 <mesh
                     castShadow
@@ -473,6 +562,9 @@ const Room = forwardRef((props, ref) => {
                     geometry={nodes.Cube016_1.geometry}
                     material={materials.Computer_screen}
                 />
+                <Suspense>
+                    < Mummy ref={mummyRef} />
+                </Suspense>
 
             </a.group>
            //cup
@@ -544,6 +636,7 @@ const Room = forwardRef((props, ref) => {
 
             //netflix
                 <a.mesh
+                    ref={netflixRef}
                     castShadow
                     receiveShadow
                     geometry={nodes.Curve006.geometry}
@@ -552,8 +645,28 @@ const Room = forwardRef((props, ref) => {
                     rotation={[Math.PI / 2, 0, 0]}
                     scale={netflix.scale}
                 />
+                <Text
+                    ref={thankyouRef}
+                    position={[1.0, 1.794, -1.107]}
+                    // scale={0.1}
+                    scale={0}
+                    color={'#ff0000'}
+                >
+                    Thank you
+                </Text>
+                <Text
+                    ref={referRef}
+                    position={[1.0, 1.694, -1.107]}
+                    // scale={0.05}
+                    scale={0}
+                    color={'#ff0000'}
+                >
+                    Hope you enjoyed :)
+                </Text>
+
             //netflix logo
                 <a.mesh
+                    ref={netflixLogoRef}
                     castShadow
                     receiveShadow
                     geometry={nodes.Curve.geometry}
@@ -643,6 +756,7 @@ const Room = forwardRef((props, ref) => {
                     scale={lightHolder.scale}
                 />
             //3 lights
+
                 <a.mesh
                     castShadow
                     receiveShadow
@@ -661,7 +775,10 @@ const Room = forwardRef((props, ref) => {
                     position={[0.012, 3.687, -0.054]}
                     scale={lightWires.scale}
                 />
-
+                <pointLight
+                    position={[0.012, 2.489, -0.049]}
+                    intensity={50}
+                />
             //3 light bulbs
                 <a.mesh
                     castShadow
@@ -683,7 +800,7 @@ const Room = forwardRef((props, ref) => {
                     receiveShadow
                     geometry={nodes.Plane.geometry}
                     // material={materials.curtain}
-                    material={new MeshStandardMaterial({ map: curtainTexture })}
+                    material={new MeshStandardMaterial({ map: curtainTexture, color: "#ffd59e" })}
                 />
                 <mesh
                     castShadow
@@ -734,7 +851,7 @@ const Room = forwardRef((props, ref) => {
                     receiveShadow
                     geometry={nodes.Plane001.geometry}
                     // material={materials.curtain}
-                    material={new MeshStandardMaterial({ map: curtainTexture })}
+                    material={new MeshStandardMaterial({ map: curtainTexture, color: "#ffd59e" })}
                 />
                 <mesh
                     castShadow
@@ -778,11 +895,17 @@ const Room = forwardRef((props, ref) => {
             <group>
 
             //pink lamp
+
+                {/* <directionalLight position={[1, 10, 10]} intensity={1} /> */}
+                <pointLight position={[-0.031, 4.39, -0.152]} intensity={100} />
+                <pointLight position={[-0.031, 2.39, -0.152]} intensity={10} />
+                <ambientLight intensity={0.2} />
                 <a.mesh
                     castShadow
                     receiveShadow
                     geometry={nodes.lamp.geometry}
-                    material={materials.lamp}
+                    // material={materials.lamp}
+                    material={new MeshStandardMaterial({ color: "#ffd59e" })}
                     position={[-1.531, 3.39, -0.752]}
                     scale={pinkLamp.scale}
                 />
@@ -803,8 +926,11 @@ const Room = forwardRef((props, ref) => {
                     castShadow
                     receiveShadow
                     geometry={nodes.bed.geometry}
-                    material={materials.bed}
-                    // material={new MeshStandardMaterial({ map: bedsheetTexture })}
+                    // material={materials.bed}
+                    material={new MeshStandardMaterial({
+                        // map: bedsheetTexture
+                        color: "#ffd59e"
+                    })}
                     position={[-0.691, 0.956, 1.398]}
                     scale={bed1.scale}
                 />
@@ -814,7 +940,7 @@ const Room = forwardRef((props, ref) => {
                     receiveShadow
                     geometry={nodes.pillows.geometry}
                     // material={materials.cushion}
-                    material={new MeshStandardMaterial({ map: bedsheetTextureNormal })}
+                    material={new MeshStandardMaterial({ map: bedsheetTextureNormal, color: "#ffd59e" })}
                     position={[-0.3, 1.136, 1.613]}
                     rotation={[3.065, 0, 0]}
                     scale={bed2.scale}
@@ -836,7 +962,10 @@ const Room = forwardRef((props, ref) => {
                     receiveShadow
                     geometry={nodes.bedsheet.geometry}
                     // material={materials.bedsheet}
-                    material={new MeshStandardMaterial({ map: bedsheetTexture })}
+                    material={new MeshStandardMaterial({
+                        // map: bedsheetTexture 
+                        color: "#ffd59e"
+                    })}
                     position={[-0.643, 0.899, 0.72]}
                     rotation={[-0.702, 0, 0]}
                     scale={bed4.scale}
@@ -847,7 +976,11 @@ const Room = forwardRef((props, ref) => {
                     receiveShadow
                     geometry={nodes.matress.geometry}
                     // material={materials.bedsheet}
-                    material={new MeshStandardMaterial({ map: bedsheetTexture })}
+                    material={new MeshStandardMaterial({
+                        // map: bedsheetTexture
+                        color: "#ffd59e"
+                    })}
+
                     position={[-0.687, 0.844, 0.699]}
                     scale={bed5.scale}
                 />
@@ -857,7 +990,7 @@ const Room = forwardRef((props, ref) => {
                     receiveShadow
                     geometry={nodes.pillows001.geometry}
                     // material={materials.cushion}
-                    material={new MeshStandardMaterial({ map: bedsheetTextureNormal })}
+                    material={new MeshStandardMaterial({ map: bedsheetTextureNormal, color: "#ffd59e" })}
 
                     position={[-0.479, 1.091, 0.671]}
                     rotation={[3.065, 0, 0]}
@@ -869,7 +1002,7 @@ const Room = forwardRef((props, ref) => {
                     receiveShadow
                     geometry={nodes.pillows002.geometry}
                     // material={materials.cushion}
-                    material={new MeshStandardMaterial({ map: bedsheetTextureNormal })}
+                    material={new MeshStandardMaterial({ map: bedsheetTextureNormal, color: "#ffd59e" })}
 
 
                     position={[-0.942, 1.11, 1.504]}
@@ -970,30 +1103,51 @@ const Room = forwardRef((props, ref) => {
                     receiveShadow
                     geometry={nodes.Plane004.geometry}
                     // material={materials.puffy_chair}
-                    material={new MeshStandardMaterial({ map: cushionTexture })}
+                    material={new MeshStandardMaterial({
+                        // map: cushionTexture
+                        color: "#ffd59e"
+                    })}
                 />
                 <mesh
                     castShadow
                     receiveShadow
                     geometry={nodes.Plane004_1.geometry}
-                    material={new MeshStandardMaterial({ map: cushionTexture })}
+                    material={new MeshStandardMaterial({
+                        // map: cushionTexture
+                        color: "#ffd59e"
+                    })}
                 // material={materials.puffy_chair}
                 />
                 <mesh
                     castShadow
                     receiveShadow
                     geometry={nodes.Plane004_2.geometry}
-                    material={new MeshStandardMaterial({ map: cushionTexture })}
+                    material={new MeshStandardMaterial({
+                        // map: cushionTexture
+                        color: "#ffd59e"
+                    })}
                 // material={materials.puffy_chair}
                 />
                 <mesh
                     castShadow
                     receiveShadow
                     geometry={nodes.Plane004_3.geometry}
-                    material={new MeshStandardMaterial({ map: cushionTexture })}
+                    material={new MeshStandardMaterial({
+                        // map: cushionTexture
+                        color: "#ffd59e"
+                    })}
                 // material={materials.puffy_chair}
                 />
             </a.group>
+
+            <mesh receiveShadow ref={planeRef} rotation-x={-1.58} position={[-0.004, -0.323, -0.004]}>
+                <planeGeometry args={[4, 4]} />
+                <meshBasicMaterial color={"#000000"} opacity={0.24} transparent />
+            </mesh>
+            <mesh receiveShadow ref={planeRef2} position={[0.245, 0.096, -2.977]} rotation-x={-0.666}>
+                {/* <planeGeometry args={[4, 2]} />
+                <meshBasicMaterial color={"#777777"} opacity={0.4} /> */}
+            </mesh>
         </a.group>
     )
 })
