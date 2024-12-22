@@ -363,7 +363,6 @@ const Room = forwardRef((props, ref) => {
                 start: '-300% top',
                 end: '500% top',
                 id: "toRight",
-                markers: true
 
             }
         })
@@ -446,18 +445,6 @@ const Room = forwardRef((props, ref) => {
 
     const planeRef = useRef()
     const planeRef2 = useRef()
-    useEffect(() => {
-        const gui = new GUI()
-        gui.add(roomRef.current.position, 'x', -50, 50, 0.001)
-        gui.add(roomRef.current.position, 'y', -50, 50, 0.001)
-        gui.add(roomRef.current.position, 'z', -50, 50, 0.001)
-        gui.add(roomRef.current.rotation, 'x', -Math.PI * 4, Math.PI * 4, 0.001)
-        gui.add(roomRef.current.rotation, 'y', -Math.PI * 4, Math.PI * 4, 0.001)
-        gui.add(roomRef.current.rotation, 'z', -Math.PI * 4, Math.PI * 4, 0.001)
-        return () => {
-            gui.destroy()
-        }
-    }, [])
 
     return (
         <a.group ref={roomRef} {...props} dispose={null} rotation-z={goLeft.rz} rotation-y={goLeft.ry} rotation-x={goLeft.rx} scale={zoomIn.scale}

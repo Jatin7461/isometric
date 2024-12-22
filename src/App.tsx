@@ -38,7 +38,6 @@ function App() {
     const first = gsap.timeline({
       scrollTrigger: {
         trigger: '.firstHalf',
-        // markers: true,
         scrub: true,
         start: 'top top',
         end: '2000% top',
@@ -157,7 +156,6 @@ function App() {
     gsap.timeline({
       scrollTrigger: {
         trigger: '.thirdHalf',
-        markers: true,
         scrub: true,
         start: 'top top',
         end: '1500% top',
