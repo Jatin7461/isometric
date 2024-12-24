@@ -1,7 +1,7 @@
 'use client'
 import React, { LegacyRef, RefObject, useRef, useState } from 'react';
 import './App.css';
-import { Canvas} from '@react-three/fiber'
+import { Canvas } from '@react-three/fiber'
 import Scene from './components/Scene';
 import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
@@ -11,10 +11,17 @@ import { FirstHalfContentHeading, FirstHalfContentString, FirstHalfHeadingName, 
 import ReactLenis from '@studio-freight/react-lenis';
 import Name from './components/Name';
 import SplitType from 'split-type';
+import { LoadingManager } from 'three';
 function App() {
   window.onbeforeunload = function () {
     window.scrollTo(0, 0);
   }
+
+  new LoadingManager(() => {
+    console.log('loaded')
+  }, () => {
+    console.log('in progress')
+  })
 
   const [smoothScroll, setSmoothScroll] = useState(false)
   // let smoothScroll = false

@@ -1,11 +1,14 @@
 import { useGLTF } from '@react-three/drei'
-import {  MeshStandardMaterial, TextureLoader } from 'three'
+import { MeshStandardMaterial, TextureLoader } from 'three'
 import { a, useSpring, useSpringRef } from '@react-spring/three'
-import {  useLoader } from '@react-three/fiber'
+import { useLoader } from '@react-three/fiber'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import Mummy from './Mummy'
 import { Text } from '@react-three/drei'
+import { forwardRef } from 'react'
+import { useRef } from 'react'
+import { Suspense } from 'react'
 const Room = forwardRef((props, ref) => {
     const { nodes, materials } = useGLTF('uploads_files_3291978_room+glb.glb')
 
@@ -472,7 +475,7 @@ const Room = forwardRef((props, ref) => {
                 position={[0, 0.15, 0]}
             />
 
-            
+
             //cupboard
             <a.group position={[-0.787, 1.222, -1.265]} scale={cupboard.scale}>
                 <mesh
