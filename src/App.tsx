@@ -12,7 +12,7 @@ import ReactLenis from '@studio-freight/react-lenis';
 import Name from './components/Name';
 import SplitType from 'split-type';
 import { LoadingManager } from 'three';
-import { Loader } from '@react-three/drei';
+import { Loader, useProgress } from '@react-three/drei';
 function App() {
   window.onbeforeunload = function () {
     window.scrollTo(0, 0);
@@ -199,8 +199,9 @@ function App() {
 
   }, { scope: container })
 
-
-
+  const { loaded, progress } = useProgress()
+  // console.log('hi')
+  // console.log(loaded, 'loaded', progress, 'progress')
 
   return (
     <ReactLenis
