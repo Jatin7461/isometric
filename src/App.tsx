@@ -12,12 +12,13 @@ import ReactLenis from '@studio-freight/react-lenis';
 import Name from './components/Name';
 import SplitType from 'split-type';
 import { LoadingManager } from 'three';
+import { Loader } from '@react-three/drei';
 function App() {
   window.onbeforeunload = function () {
     window.scrollTo(0, 0);
   }
 
-  new LoadingManager(() => {
+  const loading = new LoadingManager(() => {
     console.log('loaded')
   }, () => {
     console.log('in progress')
@@ -214,6 +215,7 @@ function App() {
           <Canvas shadows ref={camera} camera={{ fov: 75, position: [0, 25, 20] }}>
             <Scene ref={roomRef} />
           </Canvas>
+          <Loader />
         </div>
         <Name />
         <div className="floor">
