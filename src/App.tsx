@@ -200,8 +200,8 @@ function App() {
   }, { scope: container })
 
   const { loaded, progress } = useProgress()
+  console.log(loaded, 'loaded', progress, 'progress')
   // console.log('hi')
-  // console.log(loaded, 'loaded', progress, 'progress')
 
   return (
     <ReactLenis
