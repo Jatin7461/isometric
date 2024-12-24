@@ -23,7 +23,6 @@ function App() {
   const [start, setStart] = useState(false)
 
   const { progress } = useProgress();
-
   useEffect(() => {
     if (progress == 100) {
       setStart(() => {

@@ -24,7 +24,7 @@ const Scene = forwardRef((props, ref) => {
         {/* <ambientLight /> */}
         {/* <pointLight ref={lightRef} position={[0, 10, 0]} intensity={100} castShadow /> */}
         {/* <directionalLight ref={lightRef} position={[5, 10, -10]} castShadow /> */}
-        <Suspense>
+        <Suspense fallback={null}>
             <Room {...props} ref={ref} />
         </Suspense>
 
