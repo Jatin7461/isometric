@@ -1,5 +1,5 @@
 'use client'
-import React, { LegacyRef, RefObject, useRef, useState } from 'react';
+import React, { LegacyRef, RefObject, useEffect, useRef, useState } from 'react';
 import './App.css';
 import { Canvas } from '@react-three/fiber'
 import Scene from './components/Scene';
@@ -18,23 +18,94 @@ function App() {
     window.scrollTo(0, 0);
   }
 
-  const loading = new LoadingManager(() => {
-    console.log('loaded')
-  }, () => {
-    console.log('in progress')
-  })
 
   const [smoothScroll, setSmoothScroll] = useState(false)
+  const [start, setStart] = useState(false)
+
+  const { progress } = useProgress();
+
+  useEffect(() => {
+    if (progress == 100) {
+      setStart(() => {
+        return true
+      })
+    }
+  }, [progress])
+
   // let smoothScroll = false
   const container: RefObject<HTMLDivElement> = React.createRef()
   const roomRef: RefObject<any> = useRef('')
   const camera: RefObject<any> = useRef('')
   const lenisRef: LegacyRef<any> = useRef()
+
+  useGSAP(() => {
+
+    if (start) {
+      console.log('hihi')
+      const leftText = new SplitType('.leftText')
+      const rightText = new SplitType('.rightText')
+      gsap.to(['.leftText', '.rightText'], {
+        opacity: 1
+      })
+      gsap.fromTo(leftText.chars, {
+        // opacity: 0,
+        y: 40,
+        skewX: 30,
+      }, {
+        y: 0,
+        opacity: 1,
+        skewX: 0,
+        duration: 0.3,
+        stagger: 0.03,
+        delay: 6,
+        onStart: () => {
+          console.log('starting')
+        },
+        onComplete: () => {
+          console.log('completed')
+        }
+      })
+
+      gsap.fromTo(rightText.chars, {
+        y: 40,
+        opacity: 0,
+        skewX: 30,
+      }, {
+        duration: 0.3,
+        stagger: 0.03,
+        delay: 6,
+        opacity: 1,
+        skewX: 0,
+        y: 0
+
+      })
+      gsap.timeline().from('.angleDown', {
+        opacity: 0,
+        delay: 7.25
+      })
+        .fromTo('.angleDown', {
+          y: 8
+        }, {
+          y: -8,
+          repeat: -1,
+          yoyo: true,
+          ease: 'linear',
+          duration: 1,
+          onStart: () => {
+            // console.log(smoothScroll)
+            // smoothScroll = true
+            console.log(lenisRef.current.lenis.options.smoothWheel = true)
+          }
+        })
+
+
+    }
+  }, { scope: container, dependencies: [start] })
+
   useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger)
     // SplitType.create('.leftText')
-    const leftText = new SplitType('.leftText')
-    const rightText = new SplitType('.rightText')
+
     const first = gsap.timeline({
       scrollTrigger: {
         trigger: '.firstHalf',
@@ -74,47 +145,7 @@ function App() {
         ease: 'linear'
       }, '<')
 
-    // gsap.timeline().to(document.body, {
-    //   overflowY: 'auto',
-    //   delay: 7.5
-    // })
 
-    gsap.from(leftText.chars, {
-      y: 40,
-      opacity: 0,
-      skewX: 30,
-      duration: 0.3,
-      stagger: 0.03,
-      delay: 6
-    })
-
-    gsap.from(rightText.chars, {
-      y: 40,
-      opacity: 0,
-      skewX: 30,
-      duration: 0.3,
-      stagger: 0.03,
-      delay: 6
-    })
-
-    gsap.timeline().from('.angleDown', {
-      opacity: 0,
-      delay: 7.25
-    })
-      .fromTo('.angleDown', {
-        y: 8
-      }, {
-        y: -8,
-        repeat: -1,
-        yoyo: true,
-        ease: 'linear',
-        duration: 1,
-        onStart: () => {
-          // console.log(smoothScroll)
-          // smoothScroll = true
-          console.log(lenisRef.current.lenis.options.smoothWheel = true)
-        }
-      })
 
 
 
@@ -191,7 +222,6 @@ function App() {
       .to('.thirdScroll', {
         yPercent: -100,
         ease: 'linear'
-
       }, '<')
 
 
@@ -199,8 +229,6 @@ function App() {
 
   }, { scope: container })
 
-  const { loaded, progress } = useProgress()
-  console.log(loaded, 'loaded', progress, 'progress')
   // console.log('hi')
 
   return (

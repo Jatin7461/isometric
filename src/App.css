@@ -235,6 +235,7 @@ body {
 }
 
 .leftText {
+    opacity: 0;
     position: absolute;
     left: 5%;
     transform: translateY(-50%);
@@ -243,7 +244,12 @@ body {
     font-family: 'Playwrite MX Guides';
 }
 
+.char {
+    opacity: 0;
+}
+
 .rightText {
+    opacity: 0;
     position: absolute;
     right: 3%;
     font-size: 2.5vw;
@@ -294,6 +300,6 @@ a {
     display: none;
 }
 
-.display-block{
+.display-block {
     display: block;
 }
