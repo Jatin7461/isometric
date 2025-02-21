@@ -3,6 +3,7 @@ import React, { LegacyRef, RefObject, useEffect, useRef, useState } from 'react'
 import './App.css';
 import { Canvas } from '@react-three/fiber'
 import Scene from './components/Scene';
+import { Suspense } from 'react';
 import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
@@ -11,7 +12,6 @@ import { FirstHalfContentHeading, FirstHalfContentString, FirstHalfHeadingName, 
 import ReactLenis from '@studio-freight/react-lenis';
 import Name from './components/Name';
 import SplitType from 'split-type';
-import { LoadingManager } from 'three';
 import { Loader, useProgress } from '@react-three/drei';
 function App() {
   window.onbeforeunload = function () {
@@ -247,9 +247,12 @@ function App() {
         </div>
         <Name />
         <div className="floor">
-          <Canvas shadows camera={{ fov: 75 }}>
-            {/* <Floor /> */}
-          </Canvas>
+          <Suspense>
+
+            <Canvas shadows camera={{ fov: 75 }}>
+              {/* <Floor /> */}
+            </Canvas>
+          </Suspense>
         </div>
         <div className='circleRed'></div>
         <div className='circleGreen'></div>

@@ -4,6 +4,7 @@ import { GUI } from "dat.gui"
 import { forwardRef, RefObject, Suspense, useEffect, useRef } from "react"
 import Room from "./Room"
 import three, { FrontSide } from 'three'
+import LoadingScreen from "./LoadingScreen"
 
 const Scene = forwardRef((props, ref) => {
 
@@ -24,9 +25,7 @@ const Scene = forwardRef((props, ref) => {
         {/* <ambientLight /> */}
         {/* <pointLight ref={lightRef} position={[0, 10, 0]} intensity={100} castShadow /> */}
         {/* <directionalLight ref={lightRef} position={[5, 10, -10]} castShadow /> */}
-        <Suspense fallback={null}>
             <Room {...props} ref={ref} />
-        </Suspense>
 
 
 
