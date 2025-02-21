@@ -12,6 +12,7 @@ import { FirstHalfContentHeading, FirstHalfContentString, FirstHalfHeadingName, 
 import ReactLenis from '@studio-freight/react-lenis';
 import Name from './components/Name';
 import SplitType from 'split-type';
+import { LoadingManager } from 'three';
 import { Loader, useProgress } from '@react-three/drei';
 function App() {
   window.onbeforeunload = function () {
